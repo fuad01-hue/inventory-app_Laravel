@@ -71,6 +71,8 @@
                                 <td class="ps-4">{{ $index + 1 }}</td>
                                 <td class="fw-bold text-dark">{{ $cat->name }}</td>
                                 <td class="text-center">
+                                    <a href="/categories/{{ $cat->id }}/edit" class="btn btn-sm btn-outline-warning me-1"><i class="bi bi-pencil-square"></i> Edit</a>
+                                
                                     <form action="/categories/{{ $cat->id }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus kategori ini?')">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> Hapus</button>

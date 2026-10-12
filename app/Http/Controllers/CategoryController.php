@@ -26,15 +26,20 @@ class CategoryController extends Controller
         return redirect('/categories')->with('success', 'Kategori berhasil ditambahkan!');
     }
 
-    public function update(Request $request, $id)
+    public function edit(Category $category)
+    {
+        return view('categories.edit', compact('category'));
+    }
+
+    public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required|string|max:255|unique:categories,name,' . $category->id
         ]);
 
-        $category = Category::findOrFail($id);
-        $category->name = $request->name;
-        $category->save();
+        $category->update([
+            'name' => $request->name
+        ]);
 
         return redirect('/categories')->with('success', 'Kategori berhasil diperbarui!');
     }
